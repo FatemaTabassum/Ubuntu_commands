@@ -1,0 +1,169 @@
+1.
+Use the lsb_release -a command to display the Ubuntu version.
+
+2. Verifying you have 64-bit kernel architecture.
+dpkg --print-architecture
+
+3. 
+Check conda python versions
+
+conda env list | grep -v "^$\|#" |awk '{print $1;}'|xargs -I{} -d "\n" sh -c 'printf "Env: {}\t"; conda list -n {} |grep "^python\s";'
+
+4. Get information about the architecture of ubuntu 
+	lscpu
+
+5. Adding virtual environment in jupyter Notebook
+	When you have created a virtual environment, you would realize that the virtual environment is separate from your Jupyter Notebook. We need to set up a few things before we could have our virtual environment in the Jupyter Notebook.
+
+First, activate your virtual environment and run this code.
+
+pip install --user ipykernel
+
+We need to manually add the kernel if we want to have the virtual environment in the Jupyter Notebook. That is why we need to add it by running this code.
+
+python -m ipykernel install --user --name=myenv
+
+conda activate my_env
+
+conda install jupyter
+
+
+With this, we have set up our virtual environment kernel and ready to be used in the Jupyter Notebook.
+
+6. To install a custom package, write a setup.py file just like linevd. Then from the command prompt, go to the directory where setup.py resides and run the following command
+	pip install -e .
+This way the package will be installed just like other packages (numpy, pandas)
+
+
+
+7. Conda was using conda-forge for installation/upgrading of package. So it was taking a lot of time to install any package. Hence, I needed to deactivate conda-forge from my channel
+
+conda config --show-sources
+conda config --remove-key channels
+
+
+8. Also I set channel priority flexible by following command
+
+conda config --set channel_priority flexible
+conda config --show-sources
+
+9. Update anaconda-navigator
+
+10. pip install --upgrade nbconvert
+To update nbconvert for jupyter-notebook. To open Jupyter notebook in a different folder, my notebook was showing internal error 500. This command solved it. 
+
+11. 
+conda activate my_env 
+conda install python=3.6
+Install python inside a conda environment
+
+12. Command for opening jupyter notebook in a different directory
+jupyter notebook --notebook-dir /data/paperswithcode_fatema/linevd_graph_dataset
+
+13. Run jupyter notebook in a different conda environment
+conda activate myenv
+conda install numpy
+conda install ipykernel
+python -m ipykernel install --user --name=myenv
+
+
+
+
+https://www.cherryservers.com/blog/install-cuda-ubuntu
+
+This tutorial helped me to install cuda toolkit
+
+https://forums.developer.nvidia.com/t/unmet-dependencies-nvidia-dkms-535-package-conflict-breaks-ubuntu-22-04-install/265788
+
+This solved my unmet dependencies problem with cuda
+
+
+14. For installing visual studio code I followed the following two website
+
+https://linuxiac.com/install-visual-studio-code-on-ubuntu-22-04/
+
+https://medium.com/@GRajeevan/how-to-install-visual-studio-code-on-ubuntu-22-04-bfc87b52cc40
+
+
+
+
+
+
+
+==================================
+Please do a clean install of anaconda. Also before upgrading or updating read about pros and cons of any software.
+
+ 0. First we need to delete the old installation:
+ 	rm -rf ~/anaconda3
+ 	rm -rf ~/.condarc ~/.conda ~/.continuum
+Then, reinstall Anaconda.
+Finally, update all packages (including conda itself) using:
+
+ 	conda update --all
+
+
+
+Followed these 2 articles to install anaconda
+https://phoenixnap.com/kb/how-to-install-anaconda-ubuntu-18-04-or-20-04
+https://thecraftman.medium.com/installing-anaconda-navigator-on-linux-ubuntu-18-04-d805d5a0f71a
+
+
+Cd /tmp
+run the following
+curl -O https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh
+Verify the checksum
+sha256sum Anaconda3-2022.05-Linux-x86_64.sh
+Run the download script
+bash Anaconda3-2022.05-Linux-x86_64.sh
+Check python
+conda search python
+conda search --full-name python
+conda update python
+conda install python=3.9
+conda install -n base conda=23.11.0
+conda config --set auto_activate_base false
+Sometimes if it does not work delete the .condarc file and then run anaconda-navigator. Running anaconda-navigator will create .condarc file again
+After doing “conda config --set auto_activate_base false” “anaconda-navigator” was not working. So again I turned auto_activate_base True
+
+
+Create environment.yml file via conda
+with your conda environment activated, run the following command to generate dependency yaml file:
+
+	conda env export > environment_droplet.yml
+
+Commit the yml file, git clone the repo onto the target OS, and create a conda environment from it as follows:
+
+conda env create -f environment.yml
+
+ A few other frequently used commands
+
+# list all the conda environment available
+conda info --envs 
+# Create new environment named as `envname`
+conda create --name envname
+# Remove environment and its dependencies
+conda remove --name envname --all
+# Clone an existing environment
+conda create --name clone_envname --clone envname
+
+How to update an already existing environment with yml file
+conda activate myenv
+conda env update --file local.yml --prune
+
+
+
+The following is the link of weights & Biases
+https://docs.wandb.ai/guides/track
+
+conda env create --name envname --file=environments.yml
+
+
+
+
+
+
+
+
+
+
+
