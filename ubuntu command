@@ -1,11 +1,9 @@
-1.
-Use the lsb_release -a command to display the Ubuntu version.
+1. Use the lsb_release -a command to display the Ubuntu version.
 
 2. Verifying you have 64-bit kernel architecture.
 dpkg --print-architecture
 
-3. 
-Check conda python versions
+3. Check conda python versions
 
 conda env list | grep -v "^$\|#" |awk '{print $1;}'|xargs -I{} -d "\n" sh -c 'printf "Env: {}\t"; conda list -n {} |grep "^python\s";'
 
@@ -13,44 +11,45 @@ conda env list | grep -v "^$\|#" |awk '{print $1;}'|xargs -I{} -d "\n" sh -c 'pr
 	lscpu
 
 5. Adding virtual environment in jupyter Notebook
-	When you have created a virtual environment, you would realize that the virtual environment is separate from your Jupyter Notebook. We need to set up a few things before we could have our virtual environment in the Jupyter Notebook.
+   When you have created a virtual environment, you would realize that the virtual environment is separate from your Jupyter Notebook. 
+   We need to set up a few things before we could have our virtual environment in the Jupyter Notebook.
 
-First, activate your virtual environment and run this code.
+   First, activate your virtual environment and run this code.
 
-pip install --user ipykernel
+   pip install --user ipykernel
 
-We need to manually add the kernel if we want to have the virtual environment in the Jupyter Notebook. That is why we need to add it by running this code.
+   We need to manually add the kernel if we want to have the virtual environment in the Jupyter Notebook. That is why we need to add it by running this code.
 
-python -m ipykernel install --user --name=myenv
+   python -m ipykernel install --user --name=myenv
 
-conda activate my_env
+   conda activate my_env
 
-conda install jupyter
+   conda install jupyter
 
 
-With this, we have set up our virtual environment kernel and ready to be used in the Jupyter Notebook.
+   With this, we have set up our virtual environment kernel and ready to be used in the Jupyter Notebook.
 
 6. To install a custom package, write a setup.py file just like linevd. Then from the command prompt, go to the directory where setup.py resides and run the following command
 	pip install -e .
-This way the package will be installed just like other packages (numpy, pandas)
+   This way the package will be installed just like other packages (numpy, pandas)
 
 
 
 7. Conda was using conda-forge for installation/upgrading of package. So it was taking a lot of time to install any package. Hence, I needed to deactivate conda-forge from my channel
 
-conda config --show-sources
-conda config --remove-key channels
+	conda config --show-sources
+	conda config --remove-key channels
 
 
 8. Also I set channel priority flexible by following command
 
-conda config --set channel_priority flexible
-conda config --show-sources
+	conda config --set channel_priority flexible
+	conda config --show-sources
 
 9. Update anaconda-navigator
 
 10. pip install --upgrade nbconvert
-To update nbconvert for jupyter-notebook. To open Jupyter notebook in a different folder, my notebook was showing internal error 500. This command solved it. 
+	To update nbconvert for jupyter-notebook. To open Jupyter notebook in a different folder, my notebook was showing internal error 500. This command solved it. 
 
 11. 
 conda activate my_env 
@@ -58,13 +57,13 @@ conda install python=3.6
 Install python inside a conda environment
 
 12. Command for opening jupyter notebook in a different directory
-jupyter notebook --notebook-dir /data/paperswithcode_fatema/linevd_graph_dataset
+	jupyter notebook --notebook-dir /data/paperswithcode_fatema/linevd_graph_dataset
 
 13. Run jupyter notebook in a different conda environment
-conda activate myenv
-conda install numpy
-conda install ipykernel
-python -m ipykernel install --user --name=myenv
+	conda activate myenv
+	conda install numpy
+	conda install ipykernel
+	python -m ipykernel install --user --name=myenv
 
 
 
